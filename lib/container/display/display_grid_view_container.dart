@@ -19,8 +19,56 @@ class DisplayGridViewContainer extends StatefulWidget {
 }
 
 class _DisplayGridViewContainerState extends State<DisplayGridViewContainer> {
+  TextEditingController searchController = TextEditingController();
+  List<Map<String, dynamic>> showAlphabets = [];
+
+  @override
+  void initState() {
+    super.initState();
+    convertList();
+  }
+
+  void convertList() {
+    showAlphabets.clear();
+    for (var details in widget.showData) {
+      showAlphabets.add(
+        {
+          'text': details,
+          'searched': false,
+        },
+      );
+    }
+    setState(() {});
+  }
+
   void tapOnReset() {
     Navigator.pop(context);
+  }
+
+  onSearch(String text) async {
+    if (text.isNotEmpty) {
+      for (int i = 0; i < showAlphabets.length; i++) {
+        final map = showAlphabets[i];
+
+        if (text.toLowerCase().contains(map['text'].toString().toLowerCase())) {
+          map['searched'] = true;
+        } else {
+          map['searched'] = false;
+        }
+      }
+    } else {
+      convertList();
+    }
+
+    setState(() {});
+  }
+
+  tapOnSearchClear() {
+    FocusScope.of(context).requestFocus(
+      FocusNode(),
+    );
+    searchController.clear();
+    convertList();
   }
 
   @override
@@ -35,8 +83,11 @@ class _DisplayGridViewContainerState extends State<DisplayGridViewContainer> {
           child: DisplayGridView(
             columnCount: widget.columnCount,
             rowCount: widget.rowCount,
-            showData: widget.showData,
+            showData: showAlphabets,
             tapOnReset: tapOnReset,
+            onSearch: onSearch,
+            searchController: searchController,
+            tapOnSearchClear: tapOnSearchClear,
           ),
         ),
       ),
