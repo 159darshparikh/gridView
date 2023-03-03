@@ -64,6 +64,13 @@ class _CreateGridViewContainerState extends State<CreateGridViewContainer> {
           showData: showData,
         ),
       ),
+    ).then(
+      (value) {
+        FocusScope.of(context).requestFocus(
+          FocusNode(),
+        );
+        dispose();
+      },
     );
   }
 

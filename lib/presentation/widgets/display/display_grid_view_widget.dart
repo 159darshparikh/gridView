@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DisplayGridView extends StatelessWidget {
   final int rowCount;
@@ -36,6 +37,11 @@ class DisplayGridView extends StatelessWidget {
                     hintText: 'Search text',
                     border: InputBorder.none,
                   ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp("[a-zA-Z]"),
+                    ),
+                  ],
                   onChanged: onSearch,
                 ),
                 trailing: IconButton(
