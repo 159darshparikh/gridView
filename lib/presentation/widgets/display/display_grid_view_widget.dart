@@ -45,20 +45,6 @@ class DisplayGridView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                onPressed: () => tapOnReset(),
-                child: const Text(
-                  "Reset",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
             GridView.builder(
               itemCount: showData.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -85,6 +71,20 @@ class DisplayGridView extends StatelessWidget {
                         ),
                       )
                     : Container(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                onPressed: () => tapOnReset(),
+                child: const Text(
+                  "Reset",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
               ),
             ),
           ],
